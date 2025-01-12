@@ -1,42 +1,36 @@
 from datetime import datetime
-from time import sleep
 
-note_value = []
+# список для хранения заметок
+notes = []
 
-date_creation = datetime.now()
-
-count_notes = 0
+print("Добро пожаловать в 'Менеджер заметок'! Вы можете добавить новую заметку.")
 
 while True:
-    note_value.clear()
-    count_notes+=1
-    username = input('Введите имя пользователя: ')
-    note_value.append(username)
-    header = []
-    headers = input('Сколько заголовков у Вас будет? ')
-    for count in range(int(headers)):
-        header_count = input(f'Введите {count+1}-й заголовок для заметки: ')
-        header.append(header_count)
-    header.sort()
-    note_value.append(header)
-    content = input('Введите содержимое заметки: ')
-    note_value.append(content)
-    status = input('Введите статус заметки (выполнено, ожидание, не выполнено): ')
-    note_value.append(status)
-    issue_date = input('Введите дату истечения срока заметки: ')
-    note_value.append(issue_date)
+    # аргументы для заметки
+    note = {'username': input('Введите имя пользователя: '),
+            'title': input('Введите заголовок заметки: '),
+            'content': input('Введите описание заметки: '),
+            'status': input('Введите статус заметки (выполнено, ожидание, не выполнено): '),
+            'creation_date': datetime.now().strftime("%d-%m"),
+            'deadline': input('Введите дату истечения срока заметки: (день-месяц-год): ')}
 
-    short_date = note_value[4]
+    # добавление заметки в список
+    notes.append(note)
 
-    print(f"Заметка № {count_notes}")
-    print("\nДанные о заметке:")
-    print("Имя пользователя:", note_value[0])
-    print("Заголовки:", note_value[1])
-    print("Содержание заметки:", note_value[2])
-    print("Дата создания:", date_creation.strftime("%d-%m"))
-    print("Статус заметки:", note_value[3])
-    print("Дата истечения срока заметки:", short_date[0:5])
-    sleep(1)
-    choice = input("Желаете добавить ещё одну заметку? (да/нет): ").strip().lower()
-    if choice == "нет":
+    # добавление новой заметки
+    another_note = input("Хотите добавить ещё одну заметку? (да/нет): ").strip().lower()
+    if another_note != 'да':
         break
+
+# все заметки
+if not notes:
+    print("Список заметок пуст.")
+else:
+    print("\nСписок заметок:")
+    for index, note in enumerate(notes, start=1):
+        print(f"{index}. Имя: {note['username']}")
+        print(f"   Заголовок: {note['title']}")
+        print(f"   Описание: {note['content']}")
+        print(f"   Статус: {note['status']}")
+        print(f"   Дата создания: {note['creation_date']}")
+        print(f"   Дедлайн: {(note['deadline'][0:5])}\n")
