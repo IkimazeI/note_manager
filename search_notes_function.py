@@ -71,3 +71,6 @@ while True:
     continue_search = input("Хотите продолжить поиск? (да/нет): ").strip().lower()
     if continue_search != 'да':
         break
+
+if __name__ == "__main__":
+    search_notes()
