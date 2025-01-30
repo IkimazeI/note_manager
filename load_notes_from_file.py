@@ -48,8 +48,6 @@ def read_notes_from_file(filename):
 
     return notes
 
-
-# Пример использования
 filename = 'filename.txt'
 result = read_notes_from_file(filename)
 print(result)
